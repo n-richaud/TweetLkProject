@@ -16,7 +16,7 @@
               <span class="card-title">Oh noooon...</span>
             </div>
             <div class="card-content">
-              <p>Il semblerait qu'une erreur se soit produite lors de la connexion...</p>
+              <p>Il semblerait qu'une erreur se soit produite lors de votre inscription...</p>
             </div>
             
           </div>
