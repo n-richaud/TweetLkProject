@@ -1,1 +1,1 @@
-<p>Bravo vous avez réussi à partager le tweet   <?php echo $context->data['idtweet'] ; ?>  </p>
+<p>Bravo vous avez réussi à partager le tweet  </p>

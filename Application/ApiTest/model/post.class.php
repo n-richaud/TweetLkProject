@@ -1,6 +1,6 @@
 <?php
 
-class post extends
+class post extends basemodel
 {
   
  

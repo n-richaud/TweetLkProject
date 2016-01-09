@@ -13,10 +13,10 @@
    		 <div class="card">
             <div class="card-image">
               <img width="250" height="250"src="././images/404.jpg">
-              <span class="card-title">Oh noooon...</span>
+              <span class="card-title">Ho nooo...</span>
             </div>
             <div class="card-content">
-              <p>Il semblerait qu'une erreur se soit produite lors du chargement de votre profil...</p>
+              <p>Il semblerait qu'il y ait une erreur pour charger le profil...</p>
             </div>
             
           </div>

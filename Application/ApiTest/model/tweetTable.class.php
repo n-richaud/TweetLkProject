@@ -4,7 +4,7 @@ class tweetTable
 {
  
 
-  public static function getTweet($id)
+  public static function getTweet()
   {
     $connection = new dbconnection() ;
     
