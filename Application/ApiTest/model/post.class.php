@@ -2,8 +2,5 @@
 
 class post extends basemodel
 {
-  
- 
-  
-  
+	
 }

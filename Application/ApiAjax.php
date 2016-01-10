@@ -15,18 +15,14 @@ session_start();
 $context = context::getInstance();
 $context->init($nameApp);
 
-$json=$context->executeAction($action, $_REQUEST);
+$json = $context->executeAction($action, $_REQUEST);
 
-
-if($json===false)
-{
-	
+//traitement des erreurs de bases, reste à traiter les erreurs d'inclusion
+if($json === false) {
+	echo "Une grave erreur s'est produite, il est probable que l'action ".$action." n'existe pas...";
+	die;
 }
-else
-{
-	echo $json
+else if($json != context::NONE) {
+	echo $json;
 }
-
-
-
 ?>
