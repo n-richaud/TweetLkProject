@@ -2,6 +2,8 @@
 
 abstract class basemodel
 {
+  private $data;
+
   public function __construct($row = NULL)
   {
     $this->data = array();
@@ -25,7 +27,7 @@ abstract class basemodel
   public function save()
   {
     $connection = new dbconnection();
-    if(isset($this->data["id"])) {
+    if(isset($this->id)) {
       $sql = "update jabaianb.".get_class($this)." set ";
       $set = array();
       foreach($this->data as $att => $value) {

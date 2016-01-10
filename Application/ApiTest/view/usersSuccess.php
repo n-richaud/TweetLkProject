@@ -9,8 +9,8 @@
   </thead>
   <tbody>
     <?php
-    foreach($context->data as $key => $data) { 
-      if((strpos($data['avatar'], 'http') === true && !filter_var($data['avatar'], FILTER_VALIDATE_URL) !== false) || !file_exists($data['avatar'])) {
+    foreach($context->data as $key => $data) {
+      if((strpos($data['avatar'], 'http') === true && filter_var($data['avatar'], FILTER_VALIDATE_URL) === false) || !file_exists($data['avatar'])) {
         $data['avatar'] = '././images/avatar-default.png';
       }
     ?>
@@ -19,7 +19,6 @@
       <td data-field="id"><a href="././ApiTest.php?action=user&id=<?php echo $data['id'];?>"><?php $data['identifiant']; ?></a></td>
       <td data-field="name"><?php echo $data['nom']; ?></td>
       <td data-field="price"><?php echo $data['prenom']; ?></td>
-    </tr>
     </tr>
     <?php
     }
