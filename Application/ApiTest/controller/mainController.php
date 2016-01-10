@@ -29,8 +29,8 @@ class mainController
 			if(empty($id)) {
 				return context::ERROR;
 			}
-			$context['is_logged'] = 1;
-			$context['id'] = $id;
+			$context->is_logged = 1;
+			$context->id = $id;
 			return context::SUCCESS;
 		}
 		return context::ACCESS;
@@ -43,8 +43,8 @@ class mainController
 			$req = utilisateurTable::getUserByLoginAndPass($request['user'], $request['pass']);
 			//print_r($req);
 			if(!empty($req)) {
-				$context['is_logged'] = 1;
-				$context['id'] = $req[0]['id'];
+				$context->is_logged = 1;
+				$context->id = $req[0]['id'];
 				context::redirect("././ApiTest.php?action=user");
 			}
 			return context::ERROR;
@@ -54,8 +54,8 @@ class mainController
 
 	public static function logout($request, $context)
 	{
-		$context['is_logged'] = 0;
-		$context['id'] = -1;
+		$context->is_logged = 1;
+		$context->id = -1;
 		context::redirect("././ApiTest.php");
 	}
 
@@ -72,14 +72,14 @@ class mainController
 			$data['user'] = $user[0];
 			$data['tweet'] = $tweet;
 			$context->data = $data;
-			if(isset($context['is_logged']) && $context['is_logged'] && $request['id'] == $context['id']) {
+			if(isset($context->is_logged) && $context->is_logged && $request['id'] == $context->id) {
 				return context::SUCCESS;
 			} else {
 				return context::ACCESS;
 			}
-		} else if(isset($context['is_logged']) && $context['is_logged'] == 1) {
-			$user = utilisateurTable::getUserById($context['id']);
-			$tweet = tweetTable::getTweetsPostedBy($context['id']);
+		} else if(isset($context->is_logged) && $context->is_logged == 1) {
+			$user = utilisateurTable::getUserById($context->id);
+			$tweet = tweetTable::getTweetsPostedBy($context->id);
 			$data['user'] = $user[0];
 			$data['tweet'] = $tweet;
 			$context->data = $data;
@@ -99,7 +99,7 @@ class mainController
 	{
 		//print_r($request);
 		if(!empty($request['edituserform'])) {
-			$userInfo['id'] = $context['id'];
+			$userInfo['id'] = $context->id;
 			$userInfo['pass'] = sha1($request['motdepasse']);
 			$userInfo['nom'] = $request['nom'];
 			$userInfo['prenom'] = $request['prenom'];
@@ -125,8 +125,8 @@ class mainController
 			$timestamp = new DateTime();
 			$post['date'] = $timestamp->format("Y-m-d H:i:s");
 			$idpost = post::save($post);
-			$tweet['emetteur'] = $context['id'];
-			$tweet['parent'] = $context['id'];
+			$tweet['emetteur'] = $context->id;
+			$tweet['parent'] = $context->id;
 			$tweet['post'] = $idpost;
 			$idtweet = tweet::save($tweet);
 			//print_r($idtweet);
@@ -141,7 +141,7 @@ class mainController
 		if(!empty($request['idtweet'])) {
 			$intweet['parent'] = $request['parent'];
 			$intweet['post'] = $request['post'];
-			$intweet['emetteur'] = $context['id'];
+			$intweet['emetteur'] = $context->id;
 			$tweet = tweet::save($intweet);
 			return context::SUCCESS;
 		}
@@ -151,9 +151,9 @@ class mainController
 	public static function vote($request, $context)
 	{
 		//print_r($request);
-		if(!empty($request['idtweet']) && $context['is_logged'] == 1) {
+		if(!empty($request['idtweet']) && $context->is_logged == 1) {
 			$intweet['message'] = $request['idtweet'];
-			$intweet['utilisateur'] = $context['id']; 
+			$intweet['utilisateur'] = $context->id;
 			$vote = vote::save($intweet);
 			$infotweet['id'] = $request['idtweet'] ;
 			$nbvotes = vote::getVote($request['idtweet']);
