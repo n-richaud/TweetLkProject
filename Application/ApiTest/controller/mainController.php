@@ -29,8 +29,8 @@ class mainController
 			if(empty($id)) {
 				return context::ERROR;
 			}
-			$context->is_logged = 1;
-			$context->id = $id;
+			$context->setSessionAttribute('is_logged', 1);
+			$context->setSessionAttribute('id', $id);
 			return context::SUCCESS;
 		}
 		return context::ACCESS;
@@ -43,8 +43,8 @@ class mainController
 			$req = utilisateurTable::getUserByLoginAndPass($request['user'], $request['pass']);
 			//print_r($req);
 			if(!empty($req)) {
-				$context->is_logged = 1;
-				$context->id = $req[0]['id'];
+				$context->setSessionAttribute('is_logged', 1);
+				$context->setSessionAttribute('id', $req[0]['id']);
 				context::redirect("././ApiTest.php?action=user");
 			}
 			return context::ERROR;
@@ -54,8 +54,8 @@ class mainController
 
 	public static function logout($request, $context)
 	{
-		$context->is_logged = 1;
-		$context->id = -1;
+		$context->setSessionAttribute('is_logged', 1);
+		$context->setSessionAttribute('id', -1);
 		context::redirect("././ApiTest.php");
 	}
 
@@ -72,14 +72,14 @@ class mainController
 			$data['user'] = $user[0];
 			$data['tweet'] = $tweet;
 			$context->data = $data;
-			if(isset($context->is_logged) && $context->is_logged && $request['id'] == $context->id) {
+			if($context->getSessionAttribute('is_logged') == 1 && $request['id'] == $context->getSessionAttribute('id')) {
 				return context::SUCCESS;
 			} else {
 				return context::ACCESS;
 			}
-		} else if(isset($context->is_logged) && $context->is_logged == 1) {
-			$user = utilisateurTable::getUserById($context->id);
-			$tweet = tweetTable::getTweetsPostedBy($context->id);
+		} else if($context->getSessionAttribute('is_logged') == 1) {
+			$user = utilisateurTable::getUserById($context->getSessionAttribute('id'));
+			$tweet = tweetTable::getTweetsPostedBy($context->getSessionAttribute('id'));
 			$data['user'] = $user[0];
 			$data['tweet'] = $tweet;
 			$context->data = $data;
@@ -99,7 +99,7 @@ class mainController
 	{
 		//print_r($request);
 		if(!empty($request['edituserform'])) {
-			$userInfo['id'] = $context->id;
+			$userInfo['id'] = $context->getSessionAttribute('id');
 			$userInfo['pass'] = sha1($request['motdepasse']);
 			$userInfo['nom'] = $request['nom'];
 			$userInfo['prenom'] = $request['prenom'];
@@ -122,11 +122,10 @@ class mainController
 			$image = (empty($request['image']) ? "null" : $request['image']);
 			$post['texte'] = $request['text'];
 			$post['image'] = $image;
-			$timestamp = new DateTime();
-			$post['date'] = $timestamp->format("Y-m-d H:i:s");
+			$post['date'] = date("Y-m-d H:i:s");
 			$idpost = post::save($post);
-			$tweet['emetteur'] = $context->id;
-			$tweet['parent'] = $context->id;
+			$tweet['emetteur'] = $context->getSessionAttribute('id');
+			$tweet['parent'] = $context->getSessionAttribute('id');
 			$tweet['post'] = $idpost;
 			$idtweet = tweet::save($tweet);
 			//print_r($idtweet);
@@ -141,7 +140,7 @@ class mainController
 		if(!empty($request['idtweet'])) {
 			$intweet['parent'] = $request['parent'];
 			$intweet['post'] = $request['post'];
-			$intweet['emetteur'] = $context->id;
+			$intweet['emetteur'] = $context->getSessionAttribute('id');
 			$tweet = tweet::save($intweet);
 			return context::SUCCESS;
 		}
@@ -151,9 +150,9 @@ class mainController
 	public static function vote($request, $context)
 	{
 		//print_r($request);
-		if(!empty($request['idtweet']) && $context->is_logged == 1) {
+		if(!empty($request['idtweet']) && $context->getSessionAttribute('is_logged') == 1) {
 			$intweet['message'] = $request['idtweet'];
-			$intweet['utilisateur'] = $context->id;
+			$intweet['utilisateur'] = $context->getSessionAttribute('id');
 			$vote = vote::save($intweet);
 			$infotweet['id'] = $request['idtweet'] ;
 			$nbvotes = vote::getVote($request['idtweet']);

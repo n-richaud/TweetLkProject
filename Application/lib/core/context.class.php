@@ -56,7 +56,9 @@ class context
 
 	public function getSessionAttribute($attribute)
 	{
-		return $_SESSION[$attribute];
+		if(isset($_SESSION[$attribute]))
+			return $_SESSION[$attribute];
+		return null;
 	}
 
 	public function setSessionAttribute($attribute, $value)

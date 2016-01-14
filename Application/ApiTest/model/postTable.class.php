@@ -6,7 +6,7 @@ class postTable
   {
     $connection = new dbconnection();
     $sql = "select * from jabaianb.post where id='".$id."'";
-    $res = $connection->doQueryObject($sql, "postTable");
+    $res = $connection->doQueryObject($sql, "post");
     return ($res === false) ? false : $res;
   }
 }

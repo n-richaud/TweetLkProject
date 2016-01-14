@@ -19,7 +19,7 @@
   </head>
 
   <body>
-    <?php if(!empty($context->is_logged) && $context->is_logged == 1)
+    <?php if(null !== $context->getSessionAttribute('is_logged') && $context->getSessionAttribute('is_logged') == 1)
     echo '
     <nav>
       <div class="nav-wrapper blue accent-2">
