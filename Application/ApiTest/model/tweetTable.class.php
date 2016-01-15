@@ -6,7 +6,7 @@ class tweetTable
   {
     $connection = new dbconnection();
     $sql = "select * from jabaianb.tweet";
-    $res = $connection->doQueryObject($sql, "tweetTable");
+    $res = $connection->doQueryObject($sql, "tweet");
     return ($res === false) ? false : $res;
   }
 

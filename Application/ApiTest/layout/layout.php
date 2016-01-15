@@ -6,16 +6,15 @@
     <meta name="keyword" content="tweet, share, social, network">
     <meta name="description" content="ApiTest est un site pour partager vos tweets avec les internautes du monde entier.">
     <meta name="author" content="étudiants en informatique au CERI d'Avignon, tony.di-malta@alumni.univ-avignon.fr, nicolas.richaud@alumni.univ-avignon.fr">
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <!--Import material icon font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script> 
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><?php echo $action; ?></title>
   </head>
 
@@ -46,8 +45,11 @@
         </ul>
       </div>
     </nav>';
-    include($template_view);
     ?>
+
+    <div class="row"></div>
+    <?php include($template_view); ?>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript"> $(document).ready(function(){
       $('.parallax').parallax();
     });</script>

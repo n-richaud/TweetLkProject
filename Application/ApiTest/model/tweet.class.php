@@ -6,7 +6,7 @@ class tweet extends basemodel
   {
     $connection = new dbconnection();
     $sql = "select parent from jabaianb.tweet where id='".$id."'";
-    $res = $connection->doQuery($sql);
+    $res = $connection->doQueryObject($sql, "tweet");
     return ($res === false) ? false : $res;
   }
 
@@ -14,7 +14,7 @@ class tweet extends basemodel
   {
     $connection = new dbconnection();
     $sql = "select count(*) from jabaianb.vote where tweet='".$id."'";
-    $res = $connection->doQuery($sql);
+    $res = $connection->doQueryObject($sql, "tweet");
     return ($res === false) ? false : $res;
   }
 }

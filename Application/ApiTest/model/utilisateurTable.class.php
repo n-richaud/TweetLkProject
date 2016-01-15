@@ -6,7 +6,7 @@ class utilisateurTable
   {
     $connection = new dbconnection();
     $sql = "select id from jabaianb.utilisateur where identifiant='".$login."' and pass='".sha1($pass)."'";
-    $res = $connection->doQuery($sql);
+    $res = $connection->doQueryObject($sql, "utilisateur");
     return ($res === false) ? false : $res;
   }
 
@@ -22,7 +22,7 @@ class utilisateurTable
   {
     $connection = new dbconnection();
     $sql = "select * from jabaianb.utilisateur";
-    $res = $connection->doQueryObject($sql, "utilisateurTable");
+    $res = $connection->doQueryObject($sql, "utilisateur");
     return ($res === false) ? false : $res;
   }
 }
