@@ -6,7 +6,7 @@ class vote extends basemodel
   {
     $connection = new dbconnection();
     $sql = "select count(*) from jabaianb.vote where message='".$id."'";
-    $res = $connection->doQueryObject($sql, "vote");
+    $res = $connection->doQuery($sql);
     return ($res === false) ? false : $res;
   }
 }
