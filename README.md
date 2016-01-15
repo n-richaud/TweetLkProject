@@ -14,8 +14,8 @@ Inscription :
 Adaptation du TP2 pour l'utilisation de la table 'jabaianb.utilisateur'.
 Mot de passe crypté en sha1 et compatible avec la méthode getUserByLoginAndPass() de la classe "utilisateurTable.class.php" du modèle.
 
-Update (TP5) :
---------------
+Update (TP5-part1) :
+--------------------
 Url pour tester : https://pedago02a.univ-avignon.fr/~uapv1301073/Application/ApiTest.php
 
 1. Affichage d'une photo de profil, des infos de l'utilisateur, de son statut, et du formulaire d'envoi de tweets (informations factices pour tester).
